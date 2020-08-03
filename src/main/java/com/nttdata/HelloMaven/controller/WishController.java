@@ -9,6 +9,6 @@ public class WishController {
 	@GetMapping("/welcome")
 	public String greeting() {
 		return "welcome at all";
-	}
+	}   
 
 }

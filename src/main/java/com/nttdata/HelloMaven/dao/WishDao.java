@@ -2,7 +2,9 @@ package com.nttdata.HelloMaven.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +23,29 @@ public class WishDao {
 	
 	private static final Logger logger = LoggerFactory.getLogger(WishDao.class);
 	
-	@Autowired
-	JdbcTemplate jdbcTemplate;  
-	
+//	@Autowired
+//	JdbcTemplate jdbcTemplate;  
+//	
+//    
+//    public List findAll() throws Exception{
+//    	try {
+//	    	logger.info("Logging findAll - Start");
+//	    	List toRet = jdbcTemplate.query("select * from public.tabellatest", new ShowRowMapper());
+//	    	if(toRet!=null) logger.info("Logging findAll - End - size:"+toRet.size());
+//	    	else logger.warn("Logging findAll - END - Errore dati");
+//	    	return toRet;
+//    	}
+//    	catch(Exception ex) {
+//    		logger.error("Logging findAll - END",ex);
+//    		throw ex;
+//    	}
+//    	
+//    }
     
     public List findAll() throws Exception{
     	try {
 	    	logger.info("Logging findAll - Start");
-	    	List toRet = jdbcTemplate.query("select * from public.tabellatest", new ShowRowMapper());
+	    	List toRet = Arrays.asList(	"Pippo","Pluto","Paperino");
 	    	if(toRet!=null) logger.info("Logging findAll - End - size:"+toRet.size());
 	    	else logger.warn("Logging findAll - END - Errore dati");
 	    	return toRet;

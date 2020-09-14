@@ -7,9 +7,9 @@ handlers:
     script: this field is required, but ignored
 
 service: bubu
-#readiness_check:
-#  check_interval_sec: 120
-#  timeout_sec: 40
-#  failure_threshold: 5
-#  success_threshold: 5
-#  app_start_timeout_sec: 3600
+readiness_check:
+  check_interval_sec: 120
+  timeout_sec: 40
+  failure_threshold: 5
+  success_threshold: 5
+  app_start_timeout_sec: 3600

@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package appengine:stage'
+                sh 'mvn -B -DskipTests clean package appengine:deploy'
             }
         }
     }

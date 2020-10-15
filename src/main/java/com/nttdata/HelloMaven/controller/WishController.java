@@ -21,7 +21,7 @@ public class WishController {
 
 	@GetMapping("/welcome")
 	public String greeting() {
-		return "welcome at all 2";
+		return "welcome at all ";
 	}   
 	
 	@GetMapping("/getData")

@@ -87,14 +87,15 @@ public class WishController {
 //		EntityQuery.Builder queryBuilder = Query.newEntityQueryBuilder().setKind("prova");
 		 Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
 		 Key key = datastore.newKeyFactory().setKind("prova").newKey("prova1");
-		 Map<String, Value<?>> map=datastore.get(key).getProperties();
-		 Iterator<String> it=map.keySet().iterator();
-		 while (it.hasNext()) {
-			 String k=(String) it.next();
-			string += k+"="+map.get(k).toString()+";";
-			
-		}
-		 return string;
+//		 Map<String, Value<?>> map=datastore.get(key).getProperties();
+//		 Iterator<String> it=map.keySet().iterator();
+//		 while (it.hasNext()) {
+//			 String k=(String) it.next();
+//			string += k+"="+map.get(k)
+//			
+//		}
+		 
+		 return datastore.get(key).getValue("category").toString();
 		   
 		    
 //		    String keyName = "test id:5634161670881280";

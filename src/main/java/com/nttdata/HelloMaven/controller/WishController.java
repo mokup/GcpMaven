@@ -34,7 +34,7 @@ public class WishController {
 		
 		    
 		    Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
-		    String keyName = "KEY_TEST";
+		    String keyName = "5634161670881280";
 		 Key key = datastore.newKeyFactory().setKind("test").newKey(keyName);
 		 Entity entity = datastore.get(key);
 		 return entity.toString();

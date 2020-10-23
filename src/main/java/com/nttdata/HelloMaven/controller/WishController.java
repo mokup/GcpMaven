@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.cloud.datastore.Datastore;
 import com.google.cloud.datastore.DatastoreOptions;
 import com.google.cloud.datastore.Entity;
+import com.google.cloud.datastore.EntityQuery;
 import com.google.cloud.datastore.Key;
 import com.google.cloud.datastore.KeyFactory;
-import com.google.common.collect.ImmutableList;
+import com.google.cloud.datastore.Query;
+import com.google.cloud.datastore.QueryResults;
 import com.nttdata.HelloMaven.dao.WishDao;
 
 @RestController
@@ -31,8 +33,8 @@ public class WishController {
 		return "welcome at all 2";
 	}   
 	
-	@GetMapping("/getData")
-	public String getData() {
+	@GetMapping("/storeData")
+	public String storeData() {
 		 Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
 		 KeyFactory keyFactory= datastore.newKeyFactory().setKind("prova");
 		 Key taskKey1 = keyFactory.newKey("prova1");
@@ -46,6 +48,26 @@ public class WishController {
 			    datastore.put(task1);
 			    return "OK";
 		    
+		   
+		    
+//		    String keyName = "test id:5634161670881280";
+//		 Key key = datastore.newKeyFactory().setKind("test").newKey(keyName);
+//		 Entity entity = datastore.get(key);
+//		 return entity.toString();
+	}   
+	
+	@GetMapping("/getData")
+	public String getData() {
+		String string = "";
+		EntityQuery.Builder queryBuilder = Query.newEntityQueryBuilder().setKind("prova");
+		 Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+			QueryResults<Entity> tasks = datastore.run(queryBuilder.build());
+			while (tasks.hasNext()) {
+			  Entity task = tasks.next();
+			  // do something with the task
+			  string+=task.getKey().getName()+",";
+			}
+		    return string;
 		   
 		    
 //		    String keyName = "test id:5634161670881280";

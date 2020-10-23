@@ -84,9 +84,9 @@ public class WishController {
 	@GetMapping("/getDataByKeyName")
 	public String getDataByKeyName() {
 		String string = "";
-		EntityQuery.Builder queryBuilder = Query.newEntityQueryBuilder().setKind("prova");
+//		EntityQuery.Builder queryBuilder = Query.newEntityQueryBuilder().setKind("prova");
 		 Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
-		 Key key = datastore.newKeyFactory().newKey("prova1");
+		 Key key = datastore.newKeyFactory().setKind("prova").newKey("prova1");
 		 Map<String, Value<?>> map=datastore.get(key).getProperties();
 		 Iterator<String> it=map.keySet().iterator();
 		 while (it.hasNext()) {

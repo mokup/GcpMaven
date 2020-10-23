@@ -1,8 +1,12 @@
 package com.nttdata.HelloMaven.controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.annotation.Resource;
 
@@ -83,27 +87,40 @@ public class WishController {
 	
 	@GetMapping("/getDataByKeyName")
 	public String getDataByKeyName() {
-		String string = "";
-//		EntityQuery.Builder queryBuilder = Query.newEntityQueryBuilder().setKind("prova");
+		
+
 		 Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
 		 Key key = datastore.newKeyFactory().setKind("prova").newKey("prova1");
-//		 Map<String, Value<?>> map=datastore.get(key).getProperties();
-//		 Iterator<String> it=map.keySet().iterator();
-//		 while (it.hasNext()) {
-//			 String k=(String) it.next();
-//			string += k+"="+map.get(k)
-//			
-//		}
-		 
-//		 datastore.get(key).getValue("category").
+
 		 
 		 return datastore.get(key).getValue("category").get().toString();
 		   
-		    
-//		    String keyName = "test id:5634161670881280";
-//		 Key key = datastore.newKeyFactory().setKind("test").newKey(keyName);
-//		 Entity entity = datastore.get(key);
-//		 return entity.toString();
+		
+	}   
+	
+	@GetMapping("/getDataByFile")
+	public String getDataByFile() {
+		
+		String string="";
+		
+		 try (InputStream input = new FileInputStream("application.properties")) {
+
+	            Properties prop = new Properties();
+
+	            // load a properties file
+	            prop.load(input);
+
+	            // get the property value and print it out
+	            string = prop.getProperty("spring.datasource.url");
+	            string += "    "+prop.getProperty("spring.datasource.username");
+	            string += "    "+prop.getProperty("spring.datasource.password");
+
+	        } catch (IOException ex) {
+	            ex.printStackTrace();
+	        }
+		   
+		 return string;
+		
 	}   
 
 }

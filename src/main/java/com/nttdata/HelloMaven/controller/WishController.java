@@ -122,5 +122,41 @@ public class WishController {
 		 return string;
 		
 	}   
+	
+	@GetMapping("/getDatabaseConnection")
+	public String getDatabaseConnection() {
+		
+		String string="";
+		
+		 try (InputStream input = WishController.class.getClassLoader().getResourceAsStream("application.properties")) {
+
+	            Properties prop = new Properties();
+
+	            // load a properties file
+	            prop.load(input);
+
+	            // get the property value and print it out
+	            String kind  = prop.getProperty("datastore.kind");
+	            String key = prop.getProperty("datastore.kind.key");
+	            String url  = prop.getProperty("datastore.kind.db1.url");
+	            String username = prop.getProperty("datastore.kind.db1.username");
+	            String password = prop.getProperty("datastore.kind.db1.password");
+	            
+	            
+	       	 Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+			 Key k = datastore.newKeyFactory().setKind(kind).newKey(key);
+			 
+			 string+=datastore.get(k).getValue(url)+" -> "+datastore.get(k).getValue(username)
+					 +" -> "+datastore.get(k).getValue(password);
+			 
+			 return string;
+
+	        } catch (IOException ex) {
+	            return ex.getMessage();
+	        }
+		   
+		
+		
+	}   
 
 }

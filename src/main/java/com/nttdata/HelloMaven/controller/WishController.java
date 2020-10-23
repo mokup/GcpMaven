@@ -103,7 +103,7 @@ public class WishController {
 		
 		String string="";
 		
-		 try (InputStream input = new FileInputStream("application.properties")) {
+		 try (InputStream input = WishController.class.getClassLoader().getResourceAsStream("application.properties")) {
 
 	            Properties prop = new Properties();
 

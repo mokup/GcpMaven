@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.cloud.datastore.Datastore;
+import com.google.cloud.datastore.DatastoreOptions;
+import com.google.cloud.datastore.Entity;
+import com.google.cloud.datastore.Key;
 import com.nttdata.HelloMaven.dao.WishDao;
 
 @RestController
@@ -18,6 +22,7 @@ public class WishController {
 	
 	@Resource
     WishDao showDao;
+	
 
 	@GetMapping("/welcome")
 	public String greeting() {
@@ -26,16 +31,13 @@ public class WishController {
 	
 	@GetMapping("/getData")
 	public String getData() {
-		try {
-			logger.info("Logging getData - Start");
-		    String toret=showDao.findAll().toString();
-		    logger.info("Logging getData - End");
-			return toret;
-		}
-		catch(Exception ex) {
-			logger.error("Logging getData - END",ex);
-			return null;
-		}
+		
+		    
+		    Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+		    String keyName = "KEY_TEST";
+		 Key key = datastore.newKeyFactory().setKind("test").newKey(keyName);
+		 Entity entity = datastore.get(key);
+		 return entity.toString();
 	}   
 
 }

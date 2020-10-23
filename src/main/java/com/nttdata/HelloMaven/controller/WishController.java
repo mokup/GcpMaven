@@ -1,5 +1,9 @@
 package com.nttdata.HelloMaven.controller;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -16,6 +20,7 @@ import com.google.cloud.datastore.Key;
 import com.google.cloud.datastore.KeyFactory;
 import com.google.cloud.datastore.Query;
 import com.google.cloud.datastore.QueryResults;
+import com.google.cloud.datastore.Value;
 import com.nttdata.HelloMaven.dao.WishDao;
 
 @RestController
@@ -68,6 +73,28 @@ public class WishController {
 			  string+=task.getKey().getName()+",";
 			}
 		    return string;
+		   
+		    
+//		    String keyName = "test id:5634161670881280";
+//		 Key key = datastore.newKeyFactory().setKind("test").newKey(keyName);
+//		 Entity entity = datastore.get(key);
+//		 return entity.toString();
+	}   
+	
+	@GetMapping("/getDataByKeyName")
+	public String getDataByKeyName() {
+		String string = "";
+		EntityQuery.Builder queryBuilder = Query.newEntityQueryBuilder().setKind("prova");
+		 Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+		 Key key = datastore.newKeyFactory().newKey("prova1");
+		 Map<String, Value<?>> map=datastore.get(key).getProperties();
+		 Iterator<String> it=map.keySet().iterator();
+		 while (it.hasNext()) {
+			 String k=(String) it.next();
+			string += k+"="+map.get(k).toString()+";";
+			
+		}
+		 return string;
 		   
 		    
 //		    String keyName = "test id:5634161670881280";

@@ -95,7 +95,9 @@ public class WishController {
 //			
 //		}
 		 
-		 return datastore.get(key).getValue("category").toString();
+//		 datastore.get(key).getValue("category").
+		 
+		 return datastore.get(key).getValue("category").get().toString();
 		   
 		    
 //		    String keyName = "test id:5634161670881280";

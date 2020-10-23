@@ -146,8 +146,8 @@ public class WishController {
 	       	 Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
 			 Key k = datastore.newKeyFactory().setKind(kind).newKey(key);
 			 
-			 string+=datastore.get(k).getValue(url)+" -> "+datastore.get(k).getValue(username)
-					 +" -> "+datastore.get(k).getValue(password);
+			 string+=datastore.get(k).getValue(url).get().toString()+" -> "+datastore.get(k).getValue(username).get().toString()
+					 +" -> "+datastore.get(k).getValue(password).get().toString();
 			 
 			 return string;
 

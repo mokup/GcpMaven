@@ -3,7 +3,7 @@
 FROM maven:3.5-jdk-8-alpine as builder
 
 # Copy local code to the container image.
-WORKDIR /app
+WORKDIR /GcpMaven
 COPY pom.xml ./
 COPY src ./src/
 
@@ -17,7 +17,7 @@ RUN mvn package -DskipTests
 FROM adoptopenjdk/openjdk8:jdk8u202-b08-alpine-slim
 
 # Copy the jar to the production image from the builder stage.
-COPY --from=builder /target/appengine-staging/Hello*.jar /helloworld.jar
+COPY --from=builder /target/Hello*.jar /helloworld.jar
 
 # Run the web service on container startup.
 CMD ["java","-Djava.security.egd=file:/dev/./urandom","-Dserver.port=${PORT}","-jar","/helloworld.jar"]

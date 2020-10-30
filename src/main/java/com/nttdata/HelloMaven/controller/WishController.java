@@ -112,7 +112,9 @@ public class WishController {
 		 
 		 logger.info("getDataByKeyName2 - fase 2 ["+datastore.toString()+"]");
 		 
-		 Key key = datastore.newKeyFactory().setKind("EsempioKind").newKey("5636645067948032");
+		 
+		 
+		 Key key = datastore.newKeyFactory().setKind("EsempioKind").newKey(Long.parseLong("5636645067948032"));
 
 		 logger.info("getDataByKeyName2 - fase 3 ["+key.toString()+"]");
 		 

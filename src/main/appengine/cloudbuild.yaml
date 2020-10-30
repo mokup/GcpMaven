@@ -1,7 +1,16 @@
+ 
 steps:
-
-  - name: 'gcr.io/cloud-builders/mvn'
-    args: ['package', 'appengine:stage']
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['app', 'deploy', 'target/appengine-staging/app.yaml','--project','project-test-01-282013']
-    timeout: '3600s'
+  # build the container image
+- name: "gcr.io/cloud-builders/docker"
+  args: ["build", "-t", "gcr.io/project-test-01-282013/test1:v1", "."]
+  # push container image
+- name: "gcr.io/cloud-builders/docker"
+  args: ["push", "gcr.io/project-test-01-282013/test1:v1"]
+  # deploy container image to GKE
+- name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=kub.yaml
+  - --image=gcr.io/project-test-01-282013/test1:v1
+  - --location=europe-west1-b
+  - --cluster=primo-cluster

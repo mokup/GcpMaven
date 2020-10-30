@@ -2,15 +2,15 @@
 steps:
   # build the container image
 - name: "gcr.io/cloud-builders/docker"
-  args: ["build", "-t", "gcr.io/project-test-01-282013/test1:v1", "."]
+  args: ["build", "-t", "gcr.io/project-test-01-282013/pippo:v1", "."]
   # push container image
 - name: "gcr.io/cloud-builders/docker"
-  args: ["push", "gcr.io/project-test-01-282013/test1:v1"]
+  args: ["push", "gcr.io/project-test-01-282013/pippo:v1"]
   # deploy container image to GKE
 - name: "gcr.io/cloud-builders/gke-deploy"
   args:
   - run
   - --filename=kub.yaml
-  - --image=gcr.io/project-test-01-282013/test1:v1
+  - --image=gcr.io/project-test-01-282013/pippo:v1
   - --location=europe-west1-b
   - --cluster=primo-cluster

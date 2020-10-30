@@ -104,10 +104,17 @@ public class WishController {
 
 		 DatastoreOptions options =
 			        DatastoreOptions.newBuilder().setNamespace("EsempioNS").build();
+		 
+		 logger.info("getDataByKeyName2 - fase 1 ["+options.toString()+"]");
+		 
+		 
 		 Datastore datastore = options.getService();
+		 
+		 logger.info("getDataByKeyName2 - fase 2 ["+datastore.toString()+"]");
 		 
 		 Key key = datastore.newKeyFactory().setKind("EsempioKind").newKey("5636645067948032");
 
+		 logger.info("getDataByKeyName2 - fase 3 ["+key.toString()+"]");
 		 
 		 return datastore.get(key).getValue("Prop1").get().toString();
 		   

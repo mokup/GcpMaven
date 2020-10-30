@@ -98,6 +98,23 @@ public class WishController {
 		
 	}   
 	
+	@GetMapping("/getDataByKeyName2")
+	public String getDataByKeyName2() {
+		
+
+		 DatastoreOptions options =
+			        DatastoreOptions.newBuilder().setNamespace("EsempioNS").build();
+		 Datastore datastore = options.getService();
+		 
+		 Key key = datastore.newKeyFactory().setKind("EsempioKind").newKey("5636645067948032");
+
+		 
+		 return datastore.get(key).getValue("Prop1").get().toString();
+		   
+		
+	}   
+	
+	
 	@GetMapping("/getDataByFile")
 	public String getDataByFile() {
 		

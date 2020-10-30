@@ -10,7 +10,7 @@ steps:
 - name: "gcr.io/cloud-builders/gke-deploy"
   args:
   - run
-  - --filename=/src/main/appengine/kub.yaml
+  - --filename=./src/main/appengine/kub.yaml
   - --image=gcr.io/project-test-01-282013/pippo:v1
   - --location=europe-west1-b
   - --cluster=primo-cluster

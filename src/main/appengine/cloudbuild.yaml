@@ -11,6 +11,6 @@ steps:
   args:
   - run
   - --filename=./src/main/appengine/kub.yaml
-  - --image=gcr.io/project-test-01-282013/pippo:v2
+ # - --image=gcr.io/project-test-01-282013/pippo:v2
   - --location=europe-west1-b
   - --cluster=primo-cluster
